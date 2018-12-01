@@ -17,4 +17,8 @@ public class DataService {
 		return dataRepository.listar();
 	}
 	
+	public void crear(Data data) {
+		dataRepository.crear(data);
+	}
+
 }

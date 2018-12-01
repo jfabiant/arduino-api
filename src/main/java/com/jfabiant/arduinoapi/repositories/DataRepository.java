@@ -45,4 +45,12 @@ public class DataRepository {
 		return datos;
 	}
 	
+	public void crear(Data data) {
+		logger.info("crear " + data);
+		
+		String sql = "insert into data (humedad, temperatura, rayos_v, sensor_lluvia, created_at) values (?, ?, ?, ?, sysdate())";
+		jdbcTemplate.update(sql, data.getHumedad(), data.getTemperatura(), data.getRayos_v(), data.getSensor_lluvia());
+	}
+
+	
 }
