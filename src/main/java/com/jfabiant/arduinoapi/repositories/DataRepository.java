@@ -21,10 +21,82 @@ public class DataRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	public List<Data> SLluvia(){
+		logger.info("call listar()");
+		
+		String sql = "select * from data where sensor_lluvia = 'S'";
+		
+		List<Data> datos = jdbcTemplate.query(sql, new RowMapper<Data>() {
+			public Data  mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Data data = new Data();
+				data.setId(rs.getInt("id"));
+				data.setHumedad(rs.getString("humedad"));
+				data.setTemperatura(rs.getString("temperatura"));
+				data.setRayos_v(rs.getString("rayos_v"));
+				data.setSensor_lluvia(rs.getString("sensor_lluvia"));
+				data.setCreated_at(rs.getDate("created_at"));
+								
+				return data;
+			}
+		});
+
+		logger.info("datos: " + datos);
+		
+		return datos;
+	}
+	
+	public List<Data> PLluvia(){
+		logger.info("call listar()");
+		
+		String sql = "select * from data where sensor_lluvia = 'P'";
+		
+		List<Data> datos = jdbcTemplate.query(sql, new RowMapper<Data>() {
+			public Data  mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Data data = new Data();
+				data.setId(rs.getInt("id"));
+				data.setHumedad(rs.getString("humedad"));
+				data.setTemperatura(rs.getString("temperatura"));
+				data.setRayos_v(rs.getString("rayos_v"));
+				data.setSensor_lluvia(rs.getString("sensor_lluvia"));
+				data.setCreated_at(rs.getDate("created_at"));
+								
+				return data;
+			}
+		});
+
+		logger.info("datos: " + datos);
+		
+		return datos;
+	}
+	
+	public List<Data> NLluvia(){
+		logger.info("call listar()");
+		
+		String sql = "select * from data where sensor_lluvia = 'N'";
+		
+		List<Data> datos = jdbcTemplate.query(sql, new RowMapper<Data>() {
+			public Data  mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Data data = new Data();
+				data.setId(rs.getInt("id"));
+				data.setHumedad(rs.getString("humedad"));
+				data.setTemperatura(rs.getString("temperatura"));
+				data.setRayos_v(rs.getString("rayos_v"));
+				data.setSensor_lluvia(rs.getString("sensor_lluvia"));
+				data.setCreated_at(rs.getDate("created_at"));
+								
+				return data;
+			}
+		});
+
+		logger.info("datos: " + datos);
+		
+		return datos;
+	}
+	
 	public List<Data> listar(){
 		logger.info("call listar()");
 		
-		String sql = "select * from data";
+		String sql = "select id, humedad, temperatura, rayos_v, sensor_lluvia, created_at from data";
 		
 		List<Data> datos = jdbcTemplate.query(sql, new RowMapper<Data>() {
 			public Data  mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -48,8 +120,8 @@ public class DataRepository {
 	public void crear(Data data) {
 		logger.info("crear " + data);
 		
-		String sql = "insert into data (humedad, temperatura, rayos_v, sensor_lluvia, created_at) values (?, ?, ?, ?, sysdate())";
-		jdbcTemplate.update(sql, data.getHumedad(), data.getTemperatura(), data.getRayos_v(), data.getSensor_lluvia());
+		String sql = "insert into data (humedad, temperatura, rayos_v, sensor_lluvia) values (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, data.getHumedad()+" %", data.getTemperatura()+" °C", data.getRayos_v(), data.getSensor_lluvia());
 	}
 
 	

@@ -13,6 +13,18 @@ public class DataService {
 	@Autowired
 	private DataRepository dataRepository;
 	
+	public List<Data> SLluvia(){
+		return dataRepository.SLluvia();
+	}
+	
+	public List<Data> PLluvia(){
+		return dataRepository.PLluvia();
+	}
+	
+	public List<Data> NLluvia(){
+		return dataRepository.NLluvia();
+	}
+	
 	public List<Data> listar(){
 		return dataRepository.listar();
 	}

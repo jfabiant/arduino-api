@@ -32,11 +32,39 @@ public class DataController {
 		return datos;
 	}
 	
+	@GetMapping("/datos/slluvia")
+	public List<Data> SLluvia() {
+		logger.info("call datos con lluvia encontrada");
+		
+		List<Data> datos = dataService.SLluvia();
+		
+		return datos;
+	}
+	
+	@GetMapping("/datos/plluvia")
+	public List<Data> PLluvia() {
+		logger.info("call datos con posible lluvia");
+		
+		List<Data> datos = dataService.PLluvia();
+		
+		return datos;
+	}
+	
+	@GetMapping("/datos/nlluvia")
+	public List<Data> NLluvia() {
+		logger.info("call datos sin lluvia detectada");
+		
+		List<Data> datos = dataService.NLluvia();
+		
+		return datos;
+	}
+	
 	@PostMapping("/datos")	// https://spring.io/guides/gs/uploading-files/
 	public ResponseMessage crear(@RequestParam("humedad") String humedad, @RequestParam("temperatura") String temperatura, @RequestParam("rayos_v") String rayos_v, @RequestParam("sensor_lluvia") String sensor_lluvia) {
 		logger.info("call crear(" + humedad + ", " + temperatura + ", " + rayos_v + ", " + sensor_lluvia + ")");
 		
 		Data data = new Data();
+		
 		data.setHumedad(humedad);
 		data.setTemperatura(temperatura);
 		data.setRayos_v(rayos_v);
